@@ -84,7 +84,6 @@ export default {
       { text: "Acciones", value: "acciones", sortable: false }
     ],
     categorias: [],
-    editedIndex: -1,
     editedItem: {
       id: 0,
       nombre: "",
@@ -163,20 +162,20 @@ export default {
 
     obtenerSelectLocalesCategorias(id) {
       let me = this;
-        axios
+      axios
         .get("/Local/MultipleSelectLocalCategoria", {
           params: {
             idCategoria: id
           }
         })
         .then(function(response) {
-            console.log(me);
-          me.editedItem.selectLocales.selects= response.data
-              .filter(x => x.select == true)
-              .map(a => a.value);
-          me.editedItem.selectLocales.items=response.data.map(
-              a => new Object({ value: a.value, text: a.text })
-            );
+          console.log(me);
+          me.editedItem.selectLocales.selects = response.data
+            .filter(x => x.select == true)
+            .map(a => a.value);
+          me.editedItem.selectLocales.items = response.data.map(
+            a => new Object({ value: a.value, text: a.text })
+          );
         })
         .catch(function(error) {
           console.log(error);
@@ -184,9 +183,9 @@ export default {
     },
 
     editItem(item) {
-      this.editedItem.id=item.id;
-      this.editedItem.nombre=item.nombre
-      this.editedItem.descripcion=item.descripcion;
+      this.editedItem.id = item.id;
+      this.editedItem.nombre = item.nombre;
+      this.editedItem.descripcion = item.descripcion;
       this.obtenerSelectLocalesCategorias(item.id);
       this.dialog = true;
     },
